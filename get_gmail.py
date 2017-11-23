@@ -24,13 +24,13 @@ dump_file.close()
 dump_file = open(file_name, 'r') 
 soup = BeautifulSoup(dump_file.read(), 'lxml')
 divs = soup.find_all('div', dir='auto')
-csv = 'gmail_inbox'
+fmt_email = 'gmail_inbox'
 
 for div in divs:
-    csv_file = open(csv,'a')
+    fmt_email_file = open(fmt_email,'a')
     div = div.stddring 
     as_fmt_string = '%s\r\n' % div
-    csv_file.write(as_fmt_string)
+    fmt_email_file.write(as_fmt_string)
 
-csv_file.close()
+fmt_email_file.close()
 dump_file.close() 
