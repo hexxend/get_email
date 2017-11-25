@@ -1,4 +1,17 @@
 #!/usr/bin/env python3
+#
+# Scrape a selected inbox's messages 
+#
+# Hexxend
+# 2017
+#
+###############################################################################
+# TODO;
+#
+# Pass argument for search criteria
+#
+#
+
 import imaplib, os, getpass
 from bs4 import BeautifulSoup
 from sys import argv
@@ -9,6 +22,12 @@ server = argv[2]
 mail_box = argv[3]
 passwd = getpass.getpass()
 
+help_info = 'usage: get_email.py emailaddress server mail_box\ndescription: \
+             scrapes the messges in the specified inbox\n'
+
+if len(argv) < 2 :
+    print(help_info)
+
 if platform == 'win32':
     new_line = '\r\n'
 if platform == 'linux':
@@ -17,7 +36,7 @@ if platform == 'linux':
 mail = imaplib.IMAP4_SSL(server)
 mail.login(emailaddress, passwd)
 mail.select(mail_box)
-results, data = mail.search(None, mail_box)
+results, data = mail.search(None, 'All')
 
 mail_ids = data[0]
 id_list = mail_ids.split()
