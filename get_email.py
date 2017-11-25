@@ -44,11 +44,15 @@ id_list = mail_ids.split()
 def get_inbox():
     for i in reversed(id_list):
         results, data = mail.fetch(i, '(RFC822)')
-        soup = BeautifulSoup(str(i), 'lxml')
-        divs = soup.find_all('div')
-        for div in divs:
-            div = div.text 
-            as_fmt_string = '%s%s' % (div, new_line)
-            with open('%s.%s' % (server, mail_box), 'a') as fmt_email_file:
-                fmt_email_file.write(as_fmt_string)
+
+    data = str(data)
+    soup = BeautifulSoup(data, 'lxml')
+    divs = soup.find_all('div')
+
+    for div in divs:
+        div = div.text 
+        as_fmt_string = '%s%s' % (div, new_line)
+        with open('%s.%s' % (server, mail_box), 'a') as fmt_email_file:
+            fmt_email_file.write(as_fmt_string)
+
 get_inbox()
